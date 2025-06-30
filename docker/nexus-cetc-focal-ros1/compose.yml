@@ -1,0 +1,56 @@
+services:
+
+  base:
+    image: hhcmhub/nexus-cetc-focal-ros1-base:v1.0.0
+    stdin_open: true
+    tty: true 
+    privileged: true
+    entrypoint: /bin/bash
+    network_mode: host
+    cap_add:
+      - ALL
+    restart: no
+    ulimits: 
+      core: -1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  # x11
+      - ~/.ssh:/home/user/.ssh  # ssh
+      - /dev:/dev
+    environment:
+      - TERM=xterm-256color
+      - DISPLAY
+      - HHCM_FOREST_CLONE_DEFAULT_PROTO=https
+      - ROS_MASTER_URI
+      - ROS_IP
+
+  dev:
+    extends: base 
+    restart: always
+    volumes:
+      - ~/.cache/nexus-cetc-focal-ros1-base:/home/user/data
+    environment:
+      - CUSTOM_PS=(dev)
+
+  dev-nvidia:
+    extends: dev 
+    restart: always
+    volumes:
+      - ~:/home/user/host
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [gpu]
+              count: 1
+
+  xbot2_gui_server:
+    extends: base
+    entrypoint: bash -ic "until rostopic list; do sleep 1; done; sleep 1; cd ~/xbot2_ws/src/nexus_config; xbot2_gui_server gui/ros1/gui_server_config.yaml; bash"
+    restart: always
+    environment:
+      - CUSTOM_PS=(xbot2_gui_server)
