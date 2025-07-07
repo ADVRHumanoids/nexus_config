@@ -1,0 +1,33 @@
+context:
+  session: nexus_sim
+  params:
+    hw_type: sim
+
+# Simulation components
+roscore:
+  cmd: bash -c "rostopic list &> /dev/null || roscore"
+  ready_check: rostopic list
+
+gazebo_sim:
+  cmd: bash -c "rostopic list | grep -q '/gazebo' || roslaunch nexus_gazebo nexus_world.launch"
+  depends:
+    - roscore
+
+rviz:
+  cmd: bash -c "rosnode list | grep -q rviz || rviz"
+  depends:
+    - roscore
+
+xbot2_sim:
+  cmd: xbot2-core --hw sim -C $(rospack find nexus_config)/nexus_basic.yaml
+  ready_check: timeout 5 rostopic echo /xbotcore/joint_states -n 1
+  depends:
+    - roscore
+    - gazebo_sim
+    - rviz
+    
+sim_all:
+  cmd: tail -f /dev/null  # Runs forever without output
+  persistent: true
+  depends:
+    - xbot2_sim
