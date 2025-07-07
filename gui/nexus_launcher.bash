@@ -36,25 +36,29 @@ fi
 export CONCERT_LAUNCHER_DEFAULT_CONFIG="$SCRIPT_DIR/nexus_launcher_config.yaml"
 
 # Handle commands
-case "$1" in
-    all)
-        echo "Starting robot in simulation mode..."
-        concert_launcher run all
+COMMAND=$1
+shift  # Remove first argument
+
+case "$COMMAND" in
+    sim)
+        # Default simulation
+        concert_launcher run sim_all "$@"
         ;;
-    status)
-        echo "Checking status of running processes..."
-        concert_launcher status
+    sim:*)
+        # Simulation with variant (e.g., sim:dummy)
+        concert_launcher run "$COMMAND" "$@"
         ;;
-    kill)
-        echo "Killing all running processes..."
-        concert_launcher kill --all
+    real)
+        concert_launcher run real_all "$@"
         ;;
-    monitor)
-        echo "Starting monitoring session..."
-        concert_launcher mon
+    real:*)
+        # Real with variant
+        concert_launcher run "$COMMAND" "$@"
+        ;;
+    status|kill|monitor)
+        concert_launcher "$COMMAND" "$@"
         ;;
     *)
-        echo "Usage: $0 {sim|status|kill|monitor}"
-        exit 1
-        ;;
 esac
+#command should be like this ./nexus_launcher.bash real -p hw_type=ec_imp
+#command should be like this ./nexus_launcher.bash real --ctrl ec_imp
