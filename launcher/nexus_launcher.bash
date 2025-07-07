@@ -37,9 +37,9 @@ export CONCERT_LAUNCHER_DEFAULT_CONFIG="$SCRIPT_DIR/nexus_launcher_config.yaml"
 
 # Handle commands
 case "$1" in
-    sim)
+    all)
         echo "Starting robot in simulation mode..."
-        concert_launcher run sim_all
+        concert_launcher run all
         ;;
     status)
         echo "Checking status of running processes..."
