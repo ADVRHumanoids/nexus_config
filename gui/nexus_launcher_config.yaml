@@ -7,9 +7,9 @@ context:
     - &embedded embedded@10.24.12.100
     - &control nexus@10.24.12.102
     - &vision nexus@10.24.12.101
-    - &docker-xeno  "hhcmhub/${BASE_IMAGE_NAME}-xeno-v$KERNEL_VER:$TAGNAME"
-    - &docker-dev  hhcmhub/${BASE_IMAGE_NAME}-base:$TAGNAME"
-    - &docker-loco hhcmhub/${BASE_IMAGE_NAME}-locomotion:$TAGNAME"
+    - &docker-xeno  hhcmhub/nexus-cetc-focal-ros1-xeno-v5
+    - &docker-dev  hhcmhub/nexus-cetc-focal-ros1-xeno-base
+    - &docker-loco hhcmhub/nexus-cetc-focal-ros1-xeno-locomotion
 
 # components
 roscore:
