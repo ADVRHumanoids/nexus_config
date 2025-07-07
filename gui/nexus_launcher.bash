@@ -45,7 +45,7 @@ case "$COMMAND" in
         concert_launcher run sim_all "$@"
         ;;
     sim:*)
-        # Simulation with variant (e.g., sim:dummy)
+        # Simulation with variant)
         concert_launcher run "$COMMAND" "$@"
         ;;
     real)
