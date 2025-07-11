@@ -4,11 +4,6 @@
 # Define directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-# Source ROS environment
-if [ -f /opt/ros/noetic/setup.bash ]; then
-    source /opt/ros/noetic/setup.bash
-fi
-
 # Source workspace setup if it exists (prefer devel space)
 if [ -f ~/xbot2_ws/devel/setup.bash ]; then
     echo "Sourcing devel space: ~/xbot2_ws/devel/setup.bash"
@@ -20,20 +15,12 @@ else
     echo "Warning: Could not find workspace setup.bash in devel/ or install/"
 fi
 
-# Source docker setup if it exists (use the non-xeno version for simulation)
-if [ -f $SCRIPT_DIR/../../docker/nexus-cetc-focal-ros1/setup.sh ]; then
-    source $SCRIPT_DIR/../../docker/nexus-cetc-focal-ros1/setup.sh
-fi
-
 # Check if concert_launcher is installed
 if ! command -v concert_launcher &> /dev/null; then
     echo "Error: concert_launcher is not installed. Please install it first."
     echo "You can install it with: pip install --user concert_launcher"
     exit 1
 fi
-
-# Set default configuration file
-export CONCERT_LAUNCHER_DEFAULT_CONFIG="$SCRIPT_DIR/nexus_launcher_config.yaml"
 
 # Handle commands
 COMMAND=$1
