@@ -11,8 +11,6 @@ cd "$SCRIPT_DIR"
 # Load Nexus-specific configuration into environment
 # This makes all NEXUS configuration available to the submodule script
 source nexus-config_ros1.env
-cd ..
-source setup.sh
 
 # Display configuration for user verification
 # This helps users confirm their environment is set up correctly
@@ -30,7 +28,7 @@ else
 fi
 
 # Navigate to the submodule build directory
-cd docker-base/robot-template/_build/robot-focal-ros1/
+cd ../docker-base/robot-template/_build/robot-focal-ros1/
 
 # Execute the submodule build script with ALL arguments passed through
 # The "$@" variable expands to all command-line arguments exactly as received
