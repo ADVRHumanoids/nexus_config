@@ -4,11 +4,11 @@ context:
     hw_type: ec_imp
   .defines:
 
-    - &embedded embedded@10.24.12.100
-    - &control nexus@10.24.12.102
-    - &vision nexus@10.24.12.101
-    - &docker-xeno  hhcmhub/nexus-cetc-focal-ros1-xeno-v5
-    - &docker-dev  hhcmhub/nexus-cetc-focal-ros1-xeno-base
+    - &embedded embedded@10.24.9.100
+    - &control nexus@10.24.9.102
+    - &vision nexus@10.24.9.101
+    - &docker-xeno nexus-cetc-focal-ros1-xeno-dev-1
+    - &docker-dev nexus-cetc-focal-ros1-dev-1
     - &docker-loco hhcmhub/nexus-cetc-focal-ros1-xeno-locomotion
 
 # components
@@ -40,7 +40,7 @@ xbot2:
           params:
             hw_type: dummy
     
-real:
+real_all:
   cmd: tail -f /dev/null  # Runs forever without output
   persistent: true
   depends:

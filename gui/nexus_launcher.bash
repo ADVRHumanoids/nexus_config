@@ -55,6 +55,9 @@ case "$COMMAND" in
         # Real with variant
         concert_launcher run "$COMMAND" "$@"
         ;;
+    ecat)
+        concert_launcher run ecat "$@"
+        ;;
     status|kill|monitor)
         concert_launcher "$COMMAND" "$@"
         ;;
