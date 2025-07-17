@@ -4,15 +4,26 @@
 # Define directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-# Source workspace setup if it exists (prefer devel space)
-if [ -f ~/xbot2_ws/devel/setup.bash ]; then
+# Source workspace setup if it exists
+
+# Prioritize the root setup.bash file first
+if [ -f ~/xbot2_ws/setup.bash ]; then
+    echo "Sourcing space: ~/xbot2_ws/setup.bash"
+    source ~/xbot2_ws/setup.bash
+
+# If that doesn't exist, check for the 'devel' space
+elif [ -f ~/xbot2_ws/devel/setup.bash ]; then
     echo "Sourcing devel space: ~/xbot2_ws/devel/setup.bash"
     source ~/xbot2_ws/devel/setup.bash
+
+# If neither of the above exist, check for an 'install' space
 elif [ -f ~/xbot2_ws/install/setup.bash ]; then
     echo "Sourcing install space: ~/xbot2_ws/install/setup.bash"
     source ~/xbot2_ws/install/setup.bash
+
+# If none are found, print a warning
 else
-    echo "Warning: Could not find workspace setup.bash in devel/ or install/"
+    echo "Warning: Could not find a valid workspace setup.bash file."
 fi
 
 # Check if concert_launcher is installed
@@ -33,13 +44,6 @@ case "$COMMAND" in
         ;;
     sim:*)
         # Simulation with variant)
-        concert_launcher run "$COMMAND" "$@"
-        ;;
-    real)
-        concert_launcher run real_all "$@"
-        ;;
-    real:*)
-        # Real with variant
         concert_launcher run "$COMMAND" "$@"
         ;;
     ecat)

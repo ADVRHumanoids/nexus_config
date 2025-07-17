@@ -19,12 +19,12 @@ xbotcore_devices:
                 value: $PWD/../joint_map/nexus_joint_map.yaml
                 type: yamlfile
   
-    imu_ec:
-        names: []
-        thread: rt_main
-        params:
-            robot_name: *rn
-            joint_id_map: *jim
+    # imu_ec:
+    #     names: []
+    #     thread: rt_main
+    #     params:
+    #         robot_name: *rn
+    #         joint_id_map: *jim
             
     pow_ec:
         names: []
@@ -33,16 +33,16 @@ xbotcore_devices:
             robot_name: *rn
             joint_id_map: *jim
 
-    hand_ec:
-        names: []
-        thread: rt_main
-        params:
-            robot_name: *rn
-            config_ec_pos: *cfg_ec_pos
-            config_ec_imp: *cfg_ec_imp
-            #config_ec_hybr: *cfg_ec_hybr
-            config_ec_idle: *cfg_ec_idle
-            joint_id_map: *jim
+    # hand_ec:
+    #     names: []
+    #     thread: rt_main
+    #     params:
+    #         robot_name: *rn
+    #         config_ec_pos: *cfg_ec_pos
+    #         config_ec_imp: *cfg_ec_imp
+    #         #config_ec_hybr: *cfg_ec_hybr
+    #         config_ec_idle: *cfg_ec_idle
+    #         joint_id_map: *jim
                 
     joint_master:
         master: true
