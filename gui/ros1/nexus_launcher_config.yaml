@@ -13,8 +13,10 @@ context:
 
 # components
 roscore:
-  cmd: rostopic list &> /dev/null || roscore
+  cmd: roscore
   ready_check: rostopic list
+  machine: *embedded
+  docker: *docker-xeno
 
 ecat:
   cmd: ecat_master
