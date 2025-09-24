@@ -29,6 +29,12 @@ xbotcore_plugins:
     homing:
       thread: rt_main
       type: homing
+    omnisteering:
+      type: omnisteering_controller_plugin
+      thread: nrt_main
+      params:
+        wheel_names: [fl_wheel, fr_wheel, hl_wheel, hr_wheel]
+        wheel_radius: [0.085, 0.085, 0.085, 0.085] # Nexus wheel radius
 
     ros_io: {thread: nrt_main, type: ros_io}
 
