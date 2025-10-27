@@ -18,6 +18,28 @@ roscore:
   machine: *embedded
   docker: *docker-xeno
 
+pose:
+  cmd: roslaunch nexus_demo poses_demo.launch
+  machine: *embedded
+  docker: *docker-xeno
+  depends:
+    - roscore
+
+parking:
+  cmd: roslaunch nexus_python_control nexus_parking.launch command:=park
+  machine: *embedded
+  docker: *docker-xeno
+  depends:
+    - roscore
+
+unparking:
+  cmd: roslaunch nexus_python_control nexus_parking.launch command:=unpark
+  machine: *embedded
+  docker: *docker-xeno
+  depends:
+    - roscore
+
+
 ecat:
   cmd: ecat_master
   machine: *embedded
