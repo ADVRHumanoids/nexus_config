@@ -1,7 +1,6 @@
 services:
   base:
-    image: hhcmhub/nexus-cetc-noble-ros2-base:latest
-    stdin_open: true
+    image: hhcmhub/nexus-cetc-noble-ros2-xeno-v${KERNEL_VER}:latest
     tty: true 
     privileged: true
     entrypoint: /bin/bash
