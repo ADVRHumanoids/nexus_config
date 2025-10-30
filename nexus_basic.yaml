@@ -1,22 +1,20 @@
 XBotInterface:
-  urdf_path: $(rospack find nexus_urdf)/urdf/nexus.urdf
-  srdf_path: $(rospack find nexus_srdf)/srdf/nexus.srdf
+  urdf: xacro $(ros2 pkg prefix --share nexus_urdf)/urdf/nexus.urdf.xacro
+  srdf: xacro $(ros2 pkg prefix --share nexus_srdf)/srdf/nexus.srdf.xacro
 
 ModelInterface:
-  model_type: RBDL
-  is_model_floating_base: true
+  model_type: pin
 
 
 # hal
 xbotcore_device_configs:
-    sim: $(rospack find nexus_config)/hal/nexus_gz.yaml
-    dummy: $(rospack find nexus_config)/hal/nexus_dummy.yaml
+    sim: $(ros2 pkg prefix --share nexus_config)/hal/nexus_gz.yaml
+    dummy: $(ros2 pkg prefix --share nexus_config)/hal/nexus_dummy.yaml
     ec_pos: $PWD/hal/nexus_ec_all.yaml
     ec_imp: $PWD/hal/nexus_ec_all.yaml
     # ec_hybr: $PWD/hal/nexus_ec_all.yaml
     ec_idle: $PWD/hal/nexus_ec_all.yaml
-
-
+    
 # threads
 xbotcore_threads:
     rt_main:  {sched: fifo , prio: 60, period: 0.001, core_id: 2}
@@ -34,7 +32,7 @@ xbotcore_plugins:
       thread: nrt_main
       params:
         wheel_names: [fl_wheel, fr_wheel, hl_wheel, hr_wheel]
-        wheel_radius: [0.085, 0.085, 0.085, 0.085] # Nexus wheel radius
+        wheel_radius: [0.085, 0.085, 0.085, 0.085]  # Nexus wheel radius
 
     ros_io: {thread: nrt_main, type: ros_io}
 
@@ -45,5 +43,5 @@ xbotcore_plugins:
 
 # global parameters
 xbotcore_param:
-    /jm/tx_filter_autostart: {value: true, type: bool}
-    /jm/tx_filter_cutoff: {value: 2.0, type: double}  # note! 
+  /xbot/hal/joint_safety/filter_autostart: {value: true, type: bool}
+  /xbot/hal/joint_safety/filter_cutoff_hz: {value: 2.0, type: double}
