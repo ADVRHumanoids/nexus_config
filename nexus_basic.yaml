@@ -19,6 +19,7 @@ xbotcore_device_configs:
 xbotcore_threads:
     rt_main:  {sched: fifo , prio: 60, period: 0.001, core_id: 2}
     nrt_main: {sched: other, prio: 0 , period: 0.005}
+    main: {sched: other, period: 0.005, main: true}
 
 
 # plugins
@@ -34,11 +35,11 @@ xbotcore_plugins:
         wheel_names: [fl_wheel, fr_wheel, hl_wheel, hr_wheel]
         wheel_radius: [0.085, 0.085, 0.085, 0.085]  # Nexus wheel radius
 
-    ros_io: {thread: nrt_main, type: ros_io}
+    ros_io: {thread: main, type: ros2_io}
 
-    ros_control: {thread: nrt_main, type: ros_control}
+    ros_control: {thread: nrt_main, type: ros2_control}
     
-    ec_ros: {thread: nrt_main, type: ec_ros}
+    # ec_ros: {thread: nrt_main, type: ec_ros}
 
 
 # global parameters
