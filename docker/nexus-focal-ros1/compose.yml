@@ -1,7 +1,7 @@
 services:
 
   base:
-    image: hhcmhub/nexus-cetc-focal-ros1-base:v1.0.0
+    image: hhcmhub/nexus-focal-ros1-base:v1.0.0
     stdin_open: true
     tty: true 
     privileged: true
@@ -27,7 +27,7 @@ services:
     extends: base 
     restart: always
     volumes:
-      - ~/.cache/nexus-cetc-focal-ros1-base:/home/user/data
+      - ~/.cache/nexus-focal-ros1-base:/home/user/data
     environment:
       - CUSTOM_PS=(dev)
 

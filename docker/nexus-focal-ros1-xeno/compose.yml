@@ -2,9 +2,9 @@ services:
 
   dev:
     extends:
-      file: ../nexus-cetc-focal-ros1/compose.yml
+      file: ../nexus-focal-ros1/compose.yml
       service: base
-    image: hhcmhub/nexus-cetc-focal-ros1-xeno-v${KERNEL_VER}:v1.0.0
+    image: hhcmhub/nexus-focal-ros1-xeno-v${KERNEL_VER}:v1.0.0
     restart: always
     cap_add:
       - ALL
