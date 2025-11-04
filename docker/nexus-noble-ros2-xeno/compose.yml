@@ -1,7 +1,6 @@
 services:
   base:
-    image: hhcmhub/nexus-ros2-noble-ros2-base:latest
-    stdin_open: true
+    image: hhcmhub/nexus-noble-ros2-xeno-v${KERNEL_VER}:latest
     tty: true 
     privileged: true
     entrypoint: /bin/bash
@@ -22,14 +21,14 @@ services:
   dev:
     extends: base 
     volumes:
-      - ~/.cache/nexus-ros2-noble-ros2-dev:/home/user/data
+      - ~/.cache/nexus-noble-ros2-dev:/home/user/data
     environment:
       - CUSTOM_PS="(dev) "
   sim:
     extends: base 
-    image: hhcmhub/nexus-ros2-noble-ros2-sim:latest
+    image: hhcmhub/nexus-noble-ros2-sim:latest
     volumes:
-      - ~/.cache/nexus-ros2-noble-ros2-sim:/home/user/data
+      - ~/.cache/nexus-noble-ros2-sim:/home/user/data
 
   xbot2_gui_server:
     extends: base
