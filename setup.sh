@@ -11,13 +11,18 @@ export XBOT2_CONFIG_ROS1="$SCRIPT_DIR/xbot2/nexus_basic_ros1.yaml"
 export XBOT2_CONFIG_ROS2="$SCRIPT_DIR/xbot2/nexus_basic_ros2.yaml"
 
 # Default to ROS 2 assets unless ROS_VERSION explicitly requests ROS 1.
-case "${ROS_VERSION:-ros2}" in
-    ros1)
-        export CONCERT_LAUNCHER_DEFAULT_CONFIG="$CONCERT_LAUNCHER_ROS1_CONFIG"
-        set_xbot2_config "$XBOT2_CONFIG_ROS1"
-        ;;
-    *)
-        export CONCERT_LAUNCHER_DEFAULT_CONFIG="$CONCERT_LAUNCHER_ROS2_CONFIG"
-        set_xbot2_config "$XBOT2_CONFIG_ROS2"
-        ;;
+case "${ROS_VERSION:-}" in
+  1|ros1)
+    export CONCERT_LAUNCHER_DEFAULT_CONFIG="$CONCERT_LAUNCHER_ROS1_CONFIG"
+    set_xbot2_config "$XBOT2_CONFIG_ROS1"
+    ;;
+  2|ros2|"")
+    export CONCERT_LAUNCHER_DEFAULT_CONFIG="$CONCERT_LAUNCHER_ROS2_CONFIG"
+    set_xbot2_config "$XBOT2_CONFIG_ROS2"
+    ;;
+  *)
+    echo "WARN: Unknown ROS_VERSION='${ROS_VERSION}'. Defaulting to ROS 2." >&2
+    export CONCERT_LAUNCHER_DEFAULT_CONFIG="$CONCERT_LAUNCHER_ROS2_CONFIG"
+    set_xbot2_config "$XBOT2_CONFIG_ROS2"
+    ;;
 esac
