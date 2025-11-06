@@ -9,34 +9,6 @@ context:
     - &vision nexus@10.24.9.101
     - &docker-xeno nexus-noble-ros2-xeno-dev-1
     - &docker-dev nexus-noble-ros2-dev-1
-# components
-roscore:
-  cmd: roscore
-  ready_check: rostopic list
-  machine: *embedded
-  docker: *docker-xeno
-
-pose:
-  cmd: roslaunch nexus_demo poses_demo.launch
-  machine: *embedded
-  docker: *docker-xeno
-  depends:
-    - roscore
-
-parking:
-  cmd: roslaunch nexus_python_control nexus_parking.launch command:=park
-  machine: *embedded
-  docker: *docker-xeno
-  depends:
-    - roscore
-
-unparking:
-  cmd: roslaunch nexus_python_control nexus_parking.launch command:=unpark
-  machine: *embedded
-  docker: *docker-xeno
-  depends:
-    - roscore
-
 
 ecat:
   cmd: ecat_master
