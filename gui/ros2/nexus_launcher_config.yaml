@@ -7,10 +7,8 @@ context:
     - &embedded embedded@10.24.9.100
     - &control nexus@10.24.9.102
     - &vision nexus@10.24.9.101
-    - &docker-xeno nexus-focal-ros1-xeno-dev-1
-    - &docker-dev nexus-focal-ros1-dev-1
-    - &docker-loco hhcmhub/nexus-focal-ros1-xeno-locomotion
-
+    - &docker-xeno nexus-noble-ros2-xeno-dev-1
+    - &docker-dev nexus-noble-ros2-dev-1
 # components
 roscore:
   cmd: roscore
