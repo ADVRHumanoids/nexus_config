@@ -11,10 +11,10 @@ ModelInterface:
 xbotcore_device_configs:
     sim: $(rospack find nexus_config)/hal/nexus_gz.yaml
     dummy: $(rospack find nexus_config)/hal/nexus_dummy.yaml
-    ec_pos: $PWD/hal/nexus_ec_all.yaml
-    ec_imp: $PWD/hal/nexus_ec_all.yaml
+    ec_pos: $PWD/../hal/nexus_ec_all.yaml
+    ec_imp: $PWD/../hal/nexus_ec_all.yaml
     # ec_hybr: $PWD/hal/nexus_ec_all.yaml
-    ec_idle: $PWD/hal/nexus_ec_all.yaml
+    ec_idle: $PWD/../hal/nexus_ec_all.yaml
 
 
 # threads
